@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Note - Assignment Workbook Series</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar {
+            margin-top: -70px;
+            background-color: #fff;
+            padding: 15px;
+            border-bottom: 3px solid green;
+            position: fixed; /* Keeps the navbar fixed at the top */
+            z-index: 999; /* Ensures it is above other elements */
+            width: 100%;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar input[type="search"] {
+            border-radius: 50px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+
+        .workbook-card {
+            border-radius: 10px;
+            margin: 5px;
+            padding: 10px;
+        }
+
+        .workbook-card:nth-child(1) {
+            border: 2px solid red;
+        }
+
+        .workbook-card:nth-child(2) {
+            border: 2px solid blue;
+        }
+
+        .workbook-card:nth-child(3) {
+            border: 2px solid green;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            z-index: 1000;
+            position: fixed; /* Keeps the sidebar fixed */
+            top: 0;
+            left: -250px; /* Start hidden off the screen */
+            height: 100%;
+            width: 250px;
+            background-color: #f8f9fa;
+            transition: left 0.3s ease;
+            padding-top: 20px;
+            border-right: 1px solid #ddd;
+            z-index: 1000; /* Ensure sidebar is below the navbar */
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h5 {
+            padding-left: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+        }
+
+        .sidebar ul li a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Main content */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            margin-top: 70px; /* Space for navbar */
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.sidebar-active {
+            margin-left: 250px; /* Space for sidebar */
+        }
+
+        .concept-note-container {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        footer .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        footer .footer-social-icons a {
+            color: #000;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar container-->
+    <nav class="navbar">
+        <span class="burger" onclick="toggleSidebar()" style="cursor: pointer;">&#9776;</span>
+        <a href="#" class="navbar-brand">
+            <img src="Scribble monogram_color.png" alt="Logo" style="width: 50px;">AssigmentX
+        </a>
+        <form class="form-inline">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="ml-auto">
+            <a href="#" class="btn btn-outline-primary">Buy the Book</a>
+            <a href="#" class="btn btn-outline-success">About</a>
+            <a href="#" class="btn btn-outline-danger">Exit</a>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h5>Work Books</h5>
+        <ul>
+            <li class="workbook-card">
+                <a class="dropdown-toggle" onclick="toggleDropdown(this)">Work Book One</a>
+                <ul class="dropdown-content" style="display: none;">
+                    <li><a href="#">Numbers</a></li>
+                    <li><a href="#">Algebra</a></li>
+                    <li><a href="#">Geometry and Measurement</a></li>
+                    <li><a href="#">Handling Data</a></li>
+                </ul>
+            </li>
+            <li class="workbook-card">
+                <a class="dropdown-toggle" onclick="toggleDropdown(this)">Work Book Two</a>
+                <ul class="dropdown-content" style="display: none;">
+                    <li><a href="#">Numbers</a></li>
+                    <li><a href="#">Algebra</a></li>
+                    <li><a href="#">Geometry and Measurement</a></li>
+                    <li><a href="#">Handling Data</a></li>
+                </ul>
+            </li>
+            <li class="workbook-card">
+                <a class="dropdown-toggle" onclick="toggleDropdown(this)">Work Book Three</a>
+                <ul class="dropdown-content" style="display: none;">
+                    <li><a href="#">Numbers</a></li>
+                    <li><a href="#">Algebra</a></li>
+                    <li><a href="#">Geometry and Measurement</a></li>
+                    <li><a href="#">Handling Data</a></li>
+                </ul>
+            </li>
+        </ul>
+        <h5>Settings</h5>
+        <ul>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="concept-note-container">
+            <h2>BECE Related Questions</h2>
+            <p>This section provides a collection of questions that may appear in the BECE examination.</p>
+            <h3>Mathematics Questions</h3>
+            <ul>
+                <li>1. If the perimeter of a rectangle is 50 cm and its length is 15 cm, what is its width?</li>
+                <li>2. A bag contains 3 red balls and 2 blue balls. If a ball is drawn at random, what is the probability that it is red?</li>
+                <li>3. Calculate the area of a triangle with a base of 10 cm and a height of 5 cm.</li>
+            </ul>
+            <h3>Science Questions</h3>
+            <ul>
+                <li>1. What is the process by which plants make their food?</li>
+                <li>2. Define the term "ecosystem."</li>
+                <li>3. List three forms of energy and provide an example of each.</li>
+            </ul>
+            <h3>English Language Questions</h3>
+            <ul>
+                <li>1. Write a short essay on the importance of education.</li>
+                <li>2. Identify the subject and predicate in the sentence: "The cat sat on the mat."</li>
+                <li>3. Provide synonyms for the following words: happy, sad, fast.</li>
+            </ul>
+
+            <button class="btn btn-primary" onclick="downloadPDF()">Download BECE Questions as PDF</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>Copyright © 2023 Scribble Works Publishing House. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+            document.getElementById('mainContent').classList.toggle('sidebar-active');
+        }
+
+        // Hide the sidebar when clicking outside
+        document.addEventListener('click', function (event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.querySelector('.burger');
+
+            if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+                sidebar.classList.remove('active');
+                document.getElementById('mainContent').classList.remove('sidebar-active');
+            }
+        });
+
+        function toggleDropdown(element) {
+            const dropdown = element.nextElementSibling;
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text("BECE Related Questions", 20, 20);
+            doc.text("Mathematics Questions:", 20, 30);
+            doc.text("1. If the perimeter of a rectangle is 50 cm and its length is 15 cm, what is its width?", 20, 40);
+            doc.text("2. A bag contains 3 red balls and 2 blue balls. If a ball is drawn at random, what is the probability that it is red?", 20, 50);
+            doc.text("3. Calculate the area of a triangle with a base of 10 cm and a height of 5 cm.", 20, 60);
+            doc.text("Science Questions:", 20, 70);
+            doc.text("1. What is the process by which plants make their food?", 20, 80);
+            doc.text("2. Define the term 'ecosystem.'", 20, 90);
+            doc.text("3. List three forms of energy and provide an example of each.", 20, 100);
+            doc.text("English Language Questions:", 20, 110);
+            doc.text("1. Write a short essay on the importance of education.", 20, 120);
+            doc.text("2. Identify the subject and predicate in the sentence: 'The cat sat on the mat.'", 20, 130);
+            doc.text("3. Provide synonyms for the following words: happy, sad, fast.", 20, 140);
+            doc.save("bece_questions.pdf");
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+
+</html>
