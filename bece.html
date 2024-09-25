@@ -7,133 +7,7 @@
     <title>Concept Note - Assignment Workbook Series</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-
-        .navbar {
-            margin-top: -70px;
-            background-color: #fff;
-            padding: 15px;
-            border-bottom: 3px solid green;
-            position: fixed; /* Keeps the navbar fixed at the top */
-            z-index: 999; /* Ensures it is above other elements */
-            width: 100%;
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .navbar input[type="search"] {
-            border-radius: 50px;
-            padding: 5px 15px;
-            width: 300px;
-        }
-
-        .workbook-card {
-            border-radius: 10px;
-            margin: 5px;
-            padding: 10px;
-        }
-
-        .workbook-card:nth-child(1) {
-            border: 2px solid red;
-        }
-
-        .workbook-card:nth-child(2) {
-            border: 2px solid blue;
-        }
-
-        .workbook-card:nth-child(3) {
-            border: 2px solid green;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            z-index: 1000;
-            position: fixed; /* Keeps the sidebar fixed */
-            top: 0;
-            left: -250px; /* Start hidden off the screen */
-            height: 100%;
-            width: 250px;
-            background-color: #f8f9fa;
-            transition: left 0.3s ease;
-            padding-top: 20px;
-            border-right: 1px solid #ddd;
-            z-index: 1000; /* Ensure sidebar is below the navbar */
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar h5 {
-            padding-left: 20px;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            padding: 10px 20px;
-        }
-
-        .sidebar ul li a {
-            color: #000;
-            text-decoration: none;
-        }
-
-        .sidebar ul li a:hover {
-            color: #007bff;
-        }
-
-        /* Main content */
-        .main-content {
-            display: flex;
-            padding: 20px;
-            margin-top: 70px; /* Space for navbar */
-            transition: margin-left 0.3s ease;
-        }
-
-        .main-content.sidebar-active {
-            margin-left: 250px; /* Space for sidebar */
-        }
-
-        .concept-note-container {
-            flex: 1;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f8f9fa;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #f8f9fa;
-            padding: 40px;
-            margin-top: 40px;
-        }
-
-        footer .footer-social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        footer .footer-social-icons a {
-            color: #000;
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="bece1.css">
 </head>
 
 <body>
@@ -220,15 +94,19 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-social-icons">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+    <footer class="bg-light text-center py-4">
+        <div class="footer-social-icons"></div>
+            <a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
         </div>
-        <p>Copyright © 2023 Scribble Works Publishing House. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 AssignmentX. All rights reserved.</p>
+            <p>Contact us: info@Assignmentx.com</p>
+        </div>
     </footer>
+
 
     <script>
         function toggleSidebar() {

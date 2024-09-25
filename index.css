@@ -9,8 +9,12 @@ body, html {
 
 /* Navbar */
 .navbar {
+    position: fixed;
     background-color: #ffffff; /* White background */
     border-bottom: 3px solid #28a745; /* Green border */
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
 }
 
 .navbar-brand {
