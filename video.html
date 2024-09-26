@@ -7,10 +7,204 @@
     <title>Assignment Workbook Series</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="video.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            padding: 15px;
+            border-bottom: 3px solid green;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+            margin-top: -80px;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar input[type="search"] {
+            border-radius: 50px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            width: 250px;
+            background-color: #f8f9fa;
+            transition: left 0.3s ease;
+            padding-top: 20px;
+            border-right: 1px solid #ddd;
+            z-index: 1100; /* Ensure it's above the navbar and content */
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h5 {
+            padding-left: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+        }
+
+        .sidebar ul li a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Burger menu */
+        .burger {
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding-left: 20px;
+            display: inline-block;
+        }
+
+        /* Main content */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            margin-top: 80px; /* To adjust for fixed navbar */
+        }
+
+        /* Video Container */
+        .video-container {
+            flex: 3;
+            background-color: #eee;
+            padding: 20px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-height: 400px; /* Control video height */
+            border-radius: 10px;
+        }
+
+        /* Related Videos */
+        .related-videos {
+            flex: 1;
+            padding-left: 20px;
+            height: 100vh;
+            overflow-y: scroll; 
+            overflow-x:scroll;/* Allow scrolling if necessary */
+            scrollbar-width: none;
+            position: sticky;
+            top: 80px;
+            border-left: 1px solid #ddd;
+        }
+
+        .related-video-card {
+            margin-bottom: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 20px;
+        }
+
+        .comments-section h5 {
+            font-weight: bold;
+        }
+
+        .comments-section .comment {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comments-section textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 10px; /* Add padding for better user experience */
+            border-radius: 5px; /* Add border-radius */
+            border: 1px solid #ccc; /* Add border style */
+        }
+
+        /* Footer */
+        footer {
+            z-index: 1000;
+            background-color: #f8f9fa;
+            padding: 40px;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social-icons a {
+            color: #000;
+            font-size: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .video-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .related-videos {
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar input[type="search"] {
+                width: 120px;
+            }
+
+            .related-videos {
+                display: none; /* Hide related videos on very small screens */
+            }
+        }
+    </style>
 </head>
 
-<body class="work_on_smartphone">
+<body>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -21,7 +215,16 @@
         <form class="form-inline">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <div class="ml-auto">
+        <div class="ml-auto d-none d-md-flex">
+            <a href="#" class="btn btn-outline-primary">Make Purchase</a>
+            <a href="#" class="btn btn-outline-success">About</a>
+            <a href="#" class="btn btn-outline-danger">Logout</a>
+        </div>
+        <div class="ml-auto d-md-none">
+            <span class="burger" onclick="toggleMenu()">&#9776;</span>
+        </div>
+
+        <div class="mobile-menu d-none">
             <a href="#" class="btn btn-outline-primary">Make Purchase</a>
             <a href="#" class="btn btn-outline-success">About</a>
             <a href="#" class="btn btn-outline-danger">Logout</a>
@@ -33,18 +236,8 @@
         <h5>Work Books</h5>
         <ul>
             <li class="workbook-card">
-                <a class="dropdown-toggle">Work Book One</a>
-                <div id="workbook1">
-                    <ul class="dropdown-content" style="display: none;">
-                        <li><a href="#">Numbers</a></li>
-                        <li><a href="#">Algebra</a></li>
-                        <li><a href="#">Geometry and Measurement</a></li>
-                        <li><a href="#">Handling Data</a></li>
-                    </ul>
-            </li>
-            <li class="workbook-card">
-                <a class="dropdown-toggle">Work Book Two</a>
-                <ul class="dropdown-content" style="display: none;">
+                <a class="dropdown-toggle" href="#">Work Book One</a>
+                <ul class="dropdown-content">
                     <li><a href="#">Numbers</a></li>
                     <li><a href="#">Algebra</a></li>
                     <li><a href="#">Geometry and Measurement</a></li>
@@ -52,8 +245,17 @@
                 </ul>
             </li>
             <li class="workbook-card">
-                <a class="dropdown-toggle">Work Book Three</a>
-                <ul class="dropdown-content" style="display: none;">
+                <a class="dropdown-toggle" href="#">Work Book Two</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">Numbers</a></li>
+                    <li><a href="#">Algebra</a></li>
+                    <li><a href="#">Geometry and Measurement</a></li>
+                    <li><a href="#">Handling Data</a></li>
+                </ul>
+            </li>
+            <li class="workbook-card">
+                <a class="dropdown-toggle" href="#">Work Book Three</a>
+                <ul class="dropdown-content">
                     <li><a href="#">Numbers</a></li>
                     <li><a href="#">Algebra</a></li>
                     <li><a href="#">Geometry and Measurement</a></li>
@@ -69,13 +271,16 @@
 
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
-        <div class="video-container  VID">
+        <!-- Video Container -->
+        <div class="video-container">
             <video controls>
                 <source src="your_video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+
+            <!-- Video Buttons -->
             <div class="d-flex justify-content-start mt-3">
-                <button class="btn btn-custom books" onclick="window.location.href='conceptNote.html'">Concept Note</button>
+                <button class="btn btn-custom books">Concept Note</button>
                 <button class="btn btn-custom books">BECE Question</button>
             </div>
 
@@ -96,7 +301,7 @@
         </div>
 
         <!-- Related Videos Section -->
-        <div class="related-videos VID">
+        <div class="related-videos">
             <h5>Related Videos</h5>
             <div class="related-video-card">
                 <video controls>
@@ -116,55 +321,72 @@
                 </video>
                 <p>Developers: The First 10,000 hours!</p>
             </div>
+            <div class="related-video-card">
+                <video controls>
+                    <source src="related_video_3.mp4" type="video/mp4">
+                </video>
+                <p>Developers: The First 10,000 hours!</p>
+            </div>
+            <div class="related-video-card">
+                <video controls>
+                    <source src="related_video_3.mp4" type="video/mp4">
+                </video>
+                <p>Developers: The First 10,000 hours!</p>
+            </div>
+            <div class="related-video-card">
+                <video controls>
+                    <source src="related_video_3.mp4" type="video/mp4">
+                </video>
+                <p>Developers: The First 10,000 hours!</p>
+            </div>
+        </div>
+    </div>
+            
         </div>
     </div>
 
-    <footer class="bg-light text-center py-4">
-        <div class="footer-social-icons"></div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social-icons">
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
         </div>
-        <div class="container">
-            <p>&copy; 2024 AssignmentX. All rights reserved.</p>
-            <p>Contact us: info@Assignmentx.com</p>
-        </div>
+        <p>&copy; 2024 Assignment Workbook Series. All rights reserved.</p>
     </footer>
 
-    
+    <!-- Scripts -->
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
-            document.getElementById('mainContent').classList.toggle('sidebar-active');
         }
 
-        // Hide the sidebar when clicking outside
-        document.addEventListener('click', function (event) {
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const burger = document.querySelector('.burger');
             if (!sidebar.contains(event.target) && !burger.contains(event.target)) {
                 sidebar.classList.remove('active');
-                document.getElementById('mainContent').classList.remove('sidebar-active');
             }
         });
 
-        // Toggle dropdowns
-        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-        dropdownToggles.forEach(function (toggle) {
-            toggle.addEventListener('click', function () {
+        // Dropdown functionality
+        document.querySelectorAll('.dropdown-toggle').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
                 const dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
-                    dropdownContent.style.display = "block";
-                } else {
-                    dropdownContent.style.display = "none";
-                }
+                dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
             });
         });
-        
-    </script>
 
+        // Toggle mobile menu
+        function toggleMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            mobileMenu.classList.toggle('d-none');
+        }
+    </script>
 </body>
 
 </html>

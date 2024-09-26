@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BECE Student Dashboard - Assignment Workbook Series</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 15px;
+            border-bottom: 3px solid green;
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+            margin-top: -80px;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar input[type="search"] {
+            border-radius: 50px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            width: 250px;
+            background-color: #f8f9fa;
+            transition: left 0.3s ease;
+            padding-top: 20px;
+            border-right: 1px solid #ddd;
+            z-index: 1100;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h5 {
+            padding-left: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            width: 80%;
+            padding: 10px 20px;
+            margin-left: 30px;
+            border: 0.5 solid black;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease; /* Added transition for hover effect */
+        }
+
+        .sidebar ul li a {
+            border: 0.5 solid black;
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Sidebar Hover Colors */
+        .sidebar ul li:hover {
+            background-color: red;
+        }
+
+        .sidebar ul li:nth-child(2):hover {
+            background-color: yellow;
+        }
+
+        .sidebar ul li:nth-child(3):hover {
+            background-color: blue;
+        }
+
+        .sidebar ul li:nth-child(4):hover {
+            background-color: green;
+        }
+
+        /* Burger menu */
+        .burger {
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding-left: 20px;
+            display: inline-block;
+        }
+
+        /* Main content */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        /* My Books Page Content */
+        .subjects-container {
+            flex: 1;
+            padding: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            transition: background-color 0.5s ease; /* Added transition for background color */
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .book-card {
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            text-align: center;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            border-radius: 10px;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+            border: 1px solid;
+            transition: background-color 0.5s ease, color 0.5s ease; /* Transition for footer */
+        }
+
+        .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social-icons a {
+            color: #000;
+            font-size: 20px;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text */
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #333333; /* Dark gray background */
+            color: #ffffff; /* White text */
+        }
+
+        .sidebar.light-mode {
+            background-color: #f8f9fa; /* Light sidebar background */
+            border-right: 1px solid #ddd; /* Light border */
+        }
+
+        .sidebar.dark-mode {
+            background-color: #444444; /* Dark sidebar background */
+            border-right: 1px solid #666; /* Dark border */
+        }
+
+        .navbar.light-mode {
+            background-color: #fff; /* Light navbar background */
+            color: #000; /* Black text */
+        }
+
+        .navbar.dark-mode {
+            background-color: #222; /* Dark navbar background */
+            color: #fff; /* White text */
+        }
+
+        .subjects-container.light-mode {
+            background-color: #eee; /* Light background */
+        }
+
+        .subjects-container.dark-mode {
+            background-color: #555; /* Dark background */
+        }
+
+        .book-card.light-mode {
+            background-color: white; /* Light card background */
+            color: #000; /* Black text on card */
+        }
+
+        .book-card.dark-mode {
+            background-color: #666; /* Dark card background */
+            color: #fff; /* White text on card */
+        }
+
+        footer.light-mode {
+            background-color: #f8f9fa; /* Light footer background */
+            color: #000; /* Black text in footer */
+        }
+
+        footer.dark-mode {
+            background-color: #444; /* Dark footer background */
+            color: #fff; /* White text in footer */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .subjects-container {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="light-mode"> <!-- Default to light mode -->
+
+    <!-- Navbar -->
+    <nav class="navbar light-mode">
+        <span class="burger" onclick="toggleSidebar()">&#9776;</span>
+        <a href="home.html" class="navbar-brand">
+            <img src="Scribble monogram_color.png" alt="Logo" style="width: 50px;"> ScribbleX
+        </a>
+        <form class="form-inline">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <div class="ml-auto d-none d-md-flex">
+            <a href="#" class="btn btn-outline-primary">Make Purchase</a>
+            <a href="#" class="btn btn-outline-success">About</a>
+            <a href="#" class="btn btn-outline-danger">Logout</a>
+        </div>
+        <div class="ml-auto d-md-none">
+            <span class="burger" onclick="toggleMenu()">&#9776;</span>
+        </div>
+
+        <div class="mobile-menu d-none">
+            <a href="#" class="btn btn-outline-primary">Make Purchase</a>
+            <a href="#" class="btn btn-outline-success">About</a>
+            <a href="#" class="btn btn-outline-danger">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar light-mode" id="sidebar">
+        <h5>Menu</h5>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="myBooks.html"><i class="fas fa-book"></i> My Books</a></li>
+            <li><a href="pc.html"><i class="fas fa-chart-bar"></i> Progress and Competency</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-cog"></i> Settings <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="switchToLightMode()">Light Mode</a></li>
+                    <li><a href="#" onclick="switchToDarkMode()">Dark Mode</a></li>
+                    <li><a href="userprofile.html">User Profile</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="subjects-container">
+            <h2>My Books</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <h4>Mathematics Workbook</h4>
+                    <p>Author: John Doe</p>
+                    <p>Price: $20</p>
+                    <button class="btn btn-primary">Read Now</button>
+                </div>
+                <div class="book-card">
+                    <h4>Science Workbook</h4>
+                    <p>Author: Jane Smith</p>
+                    <p>Price: $15</p>
+                    <button class="btn btn-primary">Read Now</button>
+                </div>
+                <div class="book-card">
+                    <h4>English Workbook</h4>
+                    <p>Author: Emily Johnson</p>
+                    <p>Price: $18</p>
+                    <button class="btn btn-primary">Read Now</button>
+                </div>
+                <div class="book-card">
+                    <h4>Social Studies Workbook</h4>
+                    <p>Author: Robert Brown</p>
+                    <p>Price: $22</p>
+                    <button class="btn btn-primary">Read Now</button>
+                </div>
+                <!-- Add more book cards as needed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="light-mode">
+        <div class="footer-social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 ScribbleX. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+
+        function switchToLightMode() {
+            document.body.classList.remove("dark-mode");
+            document.body.classList.add("light-mode");
+            document.querySelector(".navbar").classList.remove("dark-mode");
+            document.querySelector(".navbar").classList.add("light-mode");
+            document.querySelector(".sidebar").classList.remove("dark-mode");
+            document.querySelector(".sidebar").classList.add("light-mode");
+            document.querySelector(".subjects-container").classList.remove("dark-mode");
+            document.querySelector(".subjects-container").classList.add("light-mode");
+            document.querySelector("footer").classList.remove("dark-mode");
+            document.querySelector("footer").classList.add("light-mode");
+        }
+
+        function switchToDarkMode() {
+            document.body.classList.remove("light-mode");
+            document.body.classList.add("dark-mode");
+            document.querySelector(".navbar").classList.remove("light-mode");
+            document.querySelector(".navbar").classList.add("dark-mode");
+            document.querySelector(".sidebar").classList.remove("light-mode");
+            document.querySelector(".sidebar").classList.add("dark-mode");
+            document.querySelector(".subjects-container").classList.remove("light-mode");
+            document.querySelector(".subjects-container").classList.add("dark-mode");
+            document.querySelector("footer").classList.remove("light-mode");
+            document.querySelector("footer").classList.add("dark-mode");
+        }
+    </script>
+</body>
+
+</html>
